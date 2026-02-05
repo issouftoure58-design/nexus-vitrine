@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Check, Bot, Globe, Users, Phone, MessageCircle, Smartphone, Shield } from 'lucide-react';
+import { Check, Bot, Globe, Users, Phone, MessageCircle, Smartphone } from 'lucide-react';
 import { Link } from 'wouter';
 
 const plans = [
@@ -54,7 +54,7 @@ const plans = [
       'Support dédié 24/7',
       '10 utilisateurs inclus',
       '+15€/utilisateur supplémentaire',
-      'Site Vitrine Pro OFFERT',
+      'Site Vitrine Pro -60%',
     ],
     cta: 'Passer Business',
     popular: false,
@@ -76,10 +76,11 @@ const packs = [
 
 const faqs = [
   { q: 'Puis-je changer de plan à tout moment ?', a: 'Oui, vous pouvez upgrader ou downgrader votre plan à tout moment. Les changements prennent effet immédiatement.' },
-  { q: "Y a-t-il un engagement de durée ?", a: "Non, aucun engagement sur les plans NEXUS (Starter, Pro, Business). Seule l'Option A du site vitrine (offert avec Business) implique un engagement 12 mois. L'Option B (-50%) est sans engagement." },
+  { q: "Y a-t-il un engagement de durée ?", a: "Non, aucun engagement sur les plans NEXUS (Starter, Pro, Business). Seule l'Option A du site vitrine (-60% avec Business) implique un engagement 12 mois. Toutes les autres options sont sans engagement." },
   { q: "L'installation est-elle incluse ?", a: "Oui, l'installation et la formation sont incluses dans tous les plans. Nous vous accompagnons jusqu'à ce que vous soyez autonome." },
   { q: "L'agent IA est-il obligatoire ?", a: "Non, l'agent IA est une option. Vous pouvez utiliser NEXUS sans agent et l'ajouter plus tard quand vous êtes prêt." },
-  { q: 'Que se passe-t-il si je résilie Business avant 12 mois avec un site offert ?', a: 'Si vous avez choisi l\'Option A (site offert avec engagement 12 mois) et résiliez avant terme, une facturation prorata s\'applique : Mois 1-3 : 1 490€ | Mois 4-6 : 1 200€ | Mois 7-9 : 800€ | Mois 10-11 : 400€ | Après 12 mois : 0€. Cela ne concerne pas l\'Option B (-50% sans engagement). Dans tous les cas, vous restez propriétaire de votre site.' },
+  { q: 'Comment fonctionne la réduction sur le site vitrine ?', a: 'La réduction dépend de votre plan NEXUS : Business = -60% (596€) ou -20% (1 192€), Pro = -15% (1 267€), Starter = prix normal (1 490€). L\'Option A Business (-60%) nécessite un engagement 12 mois.' },
+  { q: 'Que se passe-t-il si je résilie Business avant 12 mois avec l\'Option A ?', a: 'Si vous avez choisi l\'Option A (-60% avec engagement 12 mois) et résiliez avant terme, une facturation prorata s\'applique sur la réduction obtenue. Après 12 mois : aucune pénalité. Dans tous les cas, vous restez propriétaire de votre site.' },
   { q: 'Comment fonctionne le multi-utilisateurs ?', a: 'Chaque plan inclut un nombre d\'utilisateurs. Le propriétaire peut inviter des membres avec différents rôles (Manager, Employé, Viewer) et permissions adaptées.' },
   { q: 'Que se passe-t-il si je dépasse mes utilisateurs inclus ?', a: 'Vous pouvez ajouter des utilisateurs supplémentaires à 20€/mois (Pro) ou 15€/mois (Business). Aucune coupure de service.' },
 ];
@@ -87,8 +88,7 @@ const faqs = [
 export default function Pricing() {
   const [annual, setAnnual] = useState(false);
   const [selectedChannels, setSelectedChannels] = useState<string[]>([]);
-  const [sitePayment, setSitePayment] = useState<'onetime' | 'monthly'>('onetime');
-  const [businessOption, setBusinessOption] = useState<'free-commitment' | 'discount' | null>(null);
+  const [selectedSiteOption, setSelectedSiteOption] = useState<string | null>(null);
 
   const toggleChannel = (id: string) => {
     setSelectedChannels(prev =>
@@ -293,194 +293,236 @@ export default function Pricing() {
       {/* SITE VITRINE PRO */}
       <section className="py-24 bg-gradient-to-br from-purple-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
               <Globe className="w-4 h-4" />
               Option
             </div>
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Site Vitrine Pro</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-2">
               Un site professionnel en 7 jours, optimisé pour convertir vos visiteurs en clients
             </p>
+            <div className="inline-block bg-white px-6 py-3 rounded-xl shadow-sm">
+              <span className="text-gray-600">Prix normal : </span>
+              <span className="text-2xl font-bold text-gray-900">1 490€</span>
+              <span className="text-gray-500"> TTC</span>
+            </div>
           </div>
 
-          <div className="max-w-5xl mx-auto">
+          {/* Comparatif des 4 options */}
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
-            {/* OFFRE BUSINESS - Options A/B */}
-            <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-8 mb-10 border-2 border-green-200">
-              <div className="text-center mb-8">
-                <div className="inline-flex items-center gap-2 bg-green-500 text-white px-4 py-1.5 rounded-full text-sm font-bold mb-3">
-                  <Shield className="w-4 h-4" />
-                  Offre Plan Business
+              {/* Option Business A : -60% avec engagement */}
+              <button
+                onClick={() => setSelectedSiteOption('business-a')}
+                className={`relative text-left bg-white rounded-2xl p-6 border-2 transition-all hover:shadow-lg ${
+                  selectedSiteOption === 'business-a'
+                    ? 'border-green-500 shadow-xl ring-2 ring-green-200'
+                    : 'border-gray-200 hover:border-green-300'
+                }`}
+              >
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <span className="bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
+                    Meilleure offre
+                  </span>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                  Choisissez votre formule avantageuse
-                </h3>
-                <p className="text-gray-600">Réservé aux clients Plan Business (399€/mois)</p>
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Option A: Offert avec engagement */}
-                <button
-                  onClick={() => setBusinessOption('free-commitment')}
-                  className={`text-left bg-white rounded-xl p-6 border-2 transition-all ${
-                    businessOption === 'free-commitment'
-                      ? 'border-green-500 shadow-lg ring-1 ring-green-200'
-                      : 'border-gray-200 hover:border-green-300'
-                  }`}
-                >
-                  <div className="text-green-600 font-bold text-lg mb-3">Option A : Site OFFERT</div>
-                  <div className="mb-4">
-                    <span className="text-4xl font-bold text-gray-900">0€</span>
-                    <span className="text-gray-500 ml-2">(valeur 1 490€)</span>
+                <div className="pt-2">
+                  <div className="text-xs font-semibold text-green-600 uppercase tracking-wide mb-1">Plan Business</div>
+                  <div className="text-lg font-bold text-gray-900 mb-3">Option A : -60%</div>
+
+                  <div className="mb-3">
+                    <span className="text-3xl font-bold text-green-600">596€</span>
+                    <span className="text-gray-400 line-through ml-2 text-sm">1 490€</span>
                   </div>
 
-                  <ul className="space-y-2 mb-4">
-                    {['Site complet offert', 'Engagement 12 mois Business', 'Propriété 100% à vous'].map((f, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-sm text-gray-700">{f}</span>
-                      </li>
-                    ))}
+                  <div className="bg-green-50 rounded-lg p-3 mb-4">
+                    <div className="text-xs text-gray-600">Économie</div>
+                    <div className="text-lg font-bold text-green-600">894€</div>
+                  </div>
+
+                  <ul className="space-y-2 mb-4 text-sm">
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">Engagement 12 mois Business</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">Plan à 399€/mois</span>
+                    </li>
                   </ul>
 
-                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-gray-700">
-                    <span className="font-semibold">Résiliation anticipée :</span> facturation prorata
-                    <div className="mt-1 text-gray-500">
-                      Mois 1-3 : 1 490€ | Mois 4-6 : 1 200€ | Mois 7-9 : 800€ | Mois 10-11 : 400€
-                    </div>
+                  <div className="text-xs text-gray-500 border-t pt-3">
+                    Résiliation anticipée : facturation prorata
                   </div>
-                </button>
-
-                {/* Option B: -50% sans engagement */}
-                <button
-                  onClick={() => setBusinessOption('discount')}
-                  className={`text-left bg-white rounded-xl p-6 border-2 transition-all ${
-                    businessOption === 'discount'
-                      ? 'border-blue-500 shadow-lg ring-1 ring-blue-200'
-                      : 'border-gray-200 hover:border-blue-300'
-                  }`}
-                >
-                  <div className="text-blue-600 font-bold text-lg mb-3">Option B : Site -50%</div>
-                  <div className="mb-4">
-                    <span className="text-4xl font-bold text-gray-900">745€</span>
-                    <span className="text-gray-400 line-through ml-2">1 490€</span>
-                  </div>
-
-                  <ul className="space-y-2 mb-4">
-                    {['Réduction 50% exclusive', 'Sans engagement de durée', 'Ou 62€/mois pendant 12 mois'].map((f, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-sm text-gray-700">{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-gray-700">
-                    Liberté totale &mdash; Résiliez votre plan Business quand vous voulez
-                  </div>
-                </button>
-              </div>
-
-              {businessOption && (
-                <div className="mt-6 text-center">
-                  <Link
-                    to="/contact"
-                    className="inline-block px-8 py-3 rounded-lg font-semibold bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:shadow-xl transition-all text-lg"
-                  >
-                    {businessOption === 'free-commitment' ? 'Choisir le site offert' : 'Choisir le site à -50%'}
-                  </Link>
                 </div>
-              )}
+              </button>
 
-              <p className="mt-4 text-center text-sm text-gray-500">
-                Option A pour les projets long terme &mdash; Option B pour plus de flexibilité
-              </p>
+              {/* Option Business B : -20% sans engagement */}
+              <button
+                onClick={() => setSelectedSiteOption('business-b')}
+                className={`text-left bg-white rounded-2xl p-6 border-2 transition-all hover:shadow-lg ${
+                  selectedSiteOption === 'business-b'
+                    ? 'border-blue-500 shadow-xl ring-2 ring-blue-200'
+                    : 'border-gray-200 hover:border-blue-300'
+                }`}
+              >
+                <div className="text-xs font-semibold text-blue-600 uppercase tracking-wide mb-1">Plan Business</div>
+                <div className="text-lg font-bold text-gray-900 mb-3">Option B : -20%</div>
+
+                <div className="mb-3">
+                  <span className="text-3xl font-bold text-blue-600">1 192€</span>
+                  <span className="text-gray-400 line-through ml-2 text-sm">1 490€</span>
+                </div>
+
+                <div className="bg-blue-50 rounded-lg p-3 mb-4">
+                  <div className="text-xs text-gray-600">Économie</div>
+                  <div className="text-lg font-bold text-blue-600">298€</div>
+                </div>
+
+                <ul className="space-y-2 mb-4 text-sm">
+                  <li className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700">Sans engagement</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700">Plan à 399€/mois</span>
+                  </li>
+                </ul>
+
+                <div className="text-xs text-gray-500 border-t pt-3">
+                  Liberté totale, résiliez quand vous voulez
+                </div>
+              </button>
+
+              {/* Option Pro : -15% */}
+              <button
+                onClick={() => setSelectedSiteOption('pro')}
+                className={`text-left bg-white rounded-2xl p-6 border-2 transition-all hover:shadow-lg ${
+                  selectedSiteOption === 'pro'
+                    ? 'border-cyan-500 shadow-xl ring-2 ring-cyan-200'
+                    : 'border-gray-200 hover:border-cyan-300'
+                }`}
+              >
+                <div className="text-xs font-semibold text-cyan-600 uppercase tracking-wide mb-1">Plan Pro</div>
+                <div className="text-lg font-bold text-gray-900 mb-3">Réduction -15%</div>
+
+                <div className="mb-3">
+                  <span className="text-3xl font-bold text-cyan-600">1 267€</span>
+                  <span className="text-gray-400 line-through ml-2 text-sm">1 490€</span>
+                </div>
+
+                <div className="bg-cyan-50 rounded-lg p-3 mb-4">
+                  <div className="text-xs text-gray-600">Économie</div>
+                  <div className="text-lg font-bold text-cyan-600">223€</div>
+                </div>
+
+                <ul className="space-y-2 mb-4 text-sm">
+                  <li className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-cyan-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700">Sans engagement</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-cyan-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700">Plan à 199€/mois</span>
+                  </li>
+                </ul>
+
+                <div className="text-xs text-gray-500 border-t pt-3">
+                  Idéal pour les indépendants
+                </div>
+              </button>
+
+              {/* Option Starter : prix normal */}
+              <button
+                onClick={() => setSelectedSiteOption('starter')}
+                className={`text-left bg-white rounded-2xl p-6 border-2 transition-all hover:shadow-lg ${
+                  selectedSiteOption === 'starter'
+                    ? 'border-gray-500 shadow-xl ring-2 ring-gray-200'
+                    : 'border-gray-200 hover:border-gray-400'
+                }`}
+              >
+                <div className="text-xs font-semibold text-gray-600 uppercase tracking-wide mb-1">Plan Starter</div>
+                <div className="text-lg font-bold text-gray-900 mb-3">Prix normal</div>
+
+                <div className="mb-3">
+                  <span className="text-3xl font-bold text-gray-700">1 490€</span>
+                </div>
+
+                <div className="bg-gray-100 rounded-lg p-3 mb-4">
+                  <div className="text-xs text-gray-600">Économie</div>
+                  <div className="text-lg font-bold text-gray-500">0€</div>
+                </div>
+
+                <ul className="space-y-2 mb-4 text-sm">
+                  <li className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-gray-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700">Sans engagement</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-gray-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700">Plan à 99€/mois</span>
+                  </li>
+                </ul>
+
+                <div className="text-xs text-gray-500 border-t pt-3">
+                  Pas de réduction site
+                </div>
+              </button>
             </div>
 
-            {/* TARIF STANDARD (sans Business) */}
-            <div className="max-w-3xl mx-auto">
-              <div className="text-center mb-6">
-                <h3 className="text-xl font-bold text-gray-900">Tarif standard (sans Plan Business)</h3>
-              </div>
-
-              <div className="flex justify-center mb-6">
-                <div className="inline-flex p-1 bg-white rounded-lg shadow">
-                  <button
-                    onClick={() => setSitePayment('onetime')}
-                    className={`px-6 py-2 rounded-md font-medium transition-all ${sitePayment === 'onetime' ? 'bg-purple-600 text-white' : 'text-gray-600 hover:text-gray-900'}`}
-                  >
-                    Paiement unique
-                  </button>
-                  <button
-                    onClick={() => setSitePayment('monthly')}
-                    className={`px-6 py-2 rounded-md font-medium transition-all ${sitePayment === 'monthly' ? 'bg-purple-600 text-white' : 'text-gray-600 hover:text-gray-900'}`}
-                  >
-                    Mensuel
-                  </button>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl shadow-lg p-8">
-                <div className="text-center mb-8">
-                  {sitePayment === 'onetime' ? (
-                    <>
-                      <div className="text-5xl font-bold text-gray-900 mb-1">1 490€</div>
-                      <div className="text-gray-600">TTC paiement unique</div>
-                      <div className="text-sm text-gray-500 mt-1">+ 50€/an hébergement après 1 an</div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="text-5xl font-bold text-gray-900 mb-1">+99€</div>
-                      <div className="text-gray-600">/mois (engagement 18 mois)</div>
-                      <div className="text-sm text-gray-500 mt-1">Total : 1 782€ &mdash; hébergement inclus</div>
-                    </>
-                  )}
-                </div>
-
-                <div className="border-t border-gray-100 pt-6">
-                  <ul className="space-y-3">
-                    {[
-                      '5 pages professionnelles',
-                      'Design responsive moderne',
-                      'Contenu rédigé par IA',
-                      'SEO optimisé dès le lancement',
-                      'Hébergement + domaine .fr 1 an inclus',
-                      'Formation 1h',
-                      ...(sitePayment === 'monthly' ? ['2 mises à jour/mois incluses', 'Support technique inclus'] : []),
-                    ].map((f, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-700">{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
+            {/* CTA après sélection */}
+            {selectedSiteOption && (
+              <div className="mt-8 text-center">
                 <Link
                   to="/contact"
-                  className="mt-6 block text-center px-6 py-3 rounded-lg font-semibold bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:shadow-xl transition-all text-lg"
+                  className="inline-block px-10 py-4 rounded-xl font-semibold bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:shadow-xl transition-all text-lg"
                 >
-                  Commander mon site
+                  {selectedSiteOption === 'business-a' && 'Commander à 596€ (-60%)'}
+                  {selectedSiteOption === 'business-b' && 'Commander à 1 192€ (-20%)'}
+                  {selectedSiteOption === 'pro' && 'Commander à 1 267€ (-15%)'}
+                  {selectedSiteOption === 'starter' && 'Commander à 1 490€'}
                 </Link>
-
-                <p className="text-center text-sm text-gray-500 mt-4">Délai : 7-10 jours ouvrés</p>
               </div>
+            )}
 
-              {/* Options */}
-              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Inclus dans tous les sites */}
+            <div className="mt-12 bg-white rounded-2xl p-8 shadow-lg">
+              <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">Inclus dans tous les sites</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
-                  { name: 'Pages supplémentaires', price: '+150€/page' },
-                  { name: 'E-commerce (catalogue)', price: '+990€' },
-                  { name: 'Blog intégré', price: '+490€' },
-                  { name: 'Multilingue (2 langues)', price: '+690€' },
-                ].map(opt => (
-                  <div key={opt.name} className="bg-white p-4 rounded-lg border border-gray-200">
-                    <div className="font-semibold text-gray-900">{opt.name}</div>
-                    <div className="text-purple-600 font-bold">{opt.price}</div>
+                  '5 pages professionnelles',
+                  'Design responsive moderne',
+                  'Contenu rédigé par IA',
+                  'SEO optimisé',
+                  'Hébergement 1 an inclus',
+                  'Domaine .fr inclus',
+                  'Formation 1h',
+                  'Livraison 7-10 jours',
+                ].map((f, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
+                    <span className="text-sm text-gray-700">{f}</span>
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* Options supplémentaires */}
+            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[
+                { name: 'Pages supplémentaires', price: '+150€/page' },
+                { name: 'E-commerce (catalogue)', price: '+990€' },
+                { name: 'Blog intégré', price: '+490€' },
+                { name: 'Multilingue (2 langues)', price: '+690€' },
+              ].map(opt => (
+                <div key={opt.name} className="bg-white p-4 rounded-xl border border-gray-200 text-center">
+                  <div className="font-semibold text-gray-900 text-sm">{opt.name}</div>
+                  <div className="text-purple-600 font-bold">{opt.price}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
