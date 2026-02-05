@@ -169,7 +169,7 @@ export default function AnimatedHero() {
 
       {/* Indicateurs */}
       <div className="indicators">
-        {SCENES.map((s, i) => (
+        {SCENES.map((_, i) => (
           <button
             key={i}
             className={i === currentScene ? 'active' : ''}
