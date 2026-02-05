@@ -4,20 +4,25 @@ import NexusLayout from '../../components/nexus/NexusLayout';
 
 // Composants NEXUS Sentinel (lazy)
 const SentinelOverview = lazy(() => import('../../components/nexus/sentinel/SentinelOverview'));
+const SentinelLivePulse = lazy(() => import('../../components/nexus/sentinel/SentinelLivePulse'));
+const SentinelExplainer = lazy(() => import('../../components/nexus/sentinel/SentinelExplainer'));
 const SentinelCosts = lazy(() => import('../../components/nexus/sentinel/SentinelCosts'));
 const SentinelSecurity = lazy(() => import('../../components/nexus/sentinel/SentinelSecurity'));
 const SentinelIntelligence = lazy(() => import('../../components/nexus/sentinel/SentinelIntelligence'));
 const SentinelAutopilot = lazy(() => import('../../components/nexus/sentinel/SentinelAutopilot'));
 const SentinelBackups = lazy(() => import('../../components/nexus/sentinel/SentinelBackups'));
-// Removed: SentinelConsole, LivePulse, CostExplainer - not needed for MVP
+const SentinelConsole = lazy(() => import('../../components/nexus/sentinel/SentinelConsole'));
 
 const TAB_COMPONENTS: Record<string, React.LazyExoticComponent<any>> = {
   overview: SentinelOverview,
+  live: SentinelLivePulse,
+  explainer: SentinelExplainer,
   autopilot: SentinelAutopilot,
   costs: SentinelCosts,
   security: SentinelSecurity,
   intelligence: SentinelIntelligence,
   backups: SentinelBackups,
+  console: SentinelConsole,
 };
 
 const VALID_TABS = Object.keys(TAB_COMPONENTS);
