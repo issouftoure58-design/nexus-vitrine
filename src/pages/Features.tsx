@@ -240,9 +240,10 @@ export default function Features() {
         </div>
       </section>
 
-      {/* Options communes */}
+      {/* Options indépendantes */}
       <section className="options-section">
-        <h2>Options disponibles</h2>
+        <h2>Options indépendantes</h2>
+        <p className="options-subtitle">Non incluses dans les plans - à ajouter selon vos besoins</p>
 
         <div className="options-grid">
           {/* Agent IA */}
