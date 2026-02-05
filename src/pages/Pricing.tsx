@@ -172,7 +172,7 @@ export default function Pricing() {
                   </div>
 
                   <Link
-                    to="/website/contact"
+                    to="/contact"
                     className={`block text-center px-6 py-3 rounded-lg font-semibold transition-all ${
                       plan.popular
                         ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:shadow-xl'
@@ -278,7 +278,7 @@ export default function Pricing() {
                     Économie : {pack.save}€/mois
                   </div>
                   <Link
-                    to="/website/contact"
+                    to="/contact"
                     className="block text-center px-4 py-2 rounded-lg font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:shadow-lg transition-all"
                   >
                     Choisir ce pack
@@ -385,7 +385,7 @@ export default function Pricing() {
               {businessOption && (
                 <div className="mt-6 text-center">
                   <Link
-                    to="/website/contact"
+                    to="/contact"
                     className="inline-block px-8 py-3 rounded-lg font-semibold bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:shadow-xl transition-all text-lg"
                   >
                     {businessOption === 'free-commitment' ? 'Choisir le site offert' : 'Choisir le site à -50%'}
@@ -458,7 +458,7 @@ export default function Pricing() {
                 </div>
 
                 <Link
-                  to="/website/contact"
+                  to="/contact"
                   className="mt-6 block text-center px-6 py-3 rounded-lg font-semibold bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:shadow-xl transition-all text-lg"
                 >
                   Commander mon site
@@ -556,7 +556,7 @@ export default function Pricing() {
               Notre équipe est là pour vous aider à choisir la meilleure formule
             </p>
             <Link
-              to="/website/contact"
+              to="/contact"
               className="inline-block px-8 py-3 rounded-lg font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:shadow-xl transition-all text-lg"
             >
               Réserver une démo
