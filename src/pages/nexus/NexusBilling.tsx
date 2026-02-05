@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import NexusLayout from '../../components/nexus/NexusLayout';
+import { API_BASE } from '../../lib/api';
 
 interface TenantInfo {
   id: string;
@@ -27,7 +28,7 @@ export default function NexusBilling() {
     const fetchTenants = async () => {
       try {
         const token = localStorage.getItem('admin_token');
-        const res = await fetch('/api/nexus/tenants', { headers: { 'Authorization': `Bearer ${token}` } });
+        const res = await fetch(API_BASE + '/api/nexus/tenants', { headers: { 'Authorization': `Bearer ${token}` } });
         if (!res.ok) throw new Error('Erreur API');
         const json = await res.json();
         setTenants(json.tenants || []);

@@ -3,8 +3,8 @@ import { Link, useLocation } from 'wouter';
 import {
   LayoutDashboard, Users, CreditCard, Settings, LogOut,
   Hexagon, ChevronDown, ChevronRight, PanelLeftClose,
-  Shield, BarChart3, Activity, Search, Bot, DollarSign,
-  ShieldCheck, Brain, HardDrive, Terminal,
+  Shield, BarChart3, Bot, DollarSign,
+  ShieldCheck, Brain, HardDrive,
 } from 'lucide-react';
 import type { SidebarState } from './NexusLayout';
 
@@ -23,14 +23,11 @@ interface MenuItem {
 
 const SENTINEL_TABS = [
   { id: 'overview',     label: 'Vue d\'ensemble', icon: BarChart3,   path: '/nexus/sentinel/overview' },
-  { id: 'live',         label: 'Live Pulse',      icon: Activity,    path: '/nexus/sentinel/live' },
-  { id: 'explainer',    label: 'Explainer',       icon: Search,      path: '/nexus/sentinel/explainer' },
   { id: 'autopilot',    label: 'Autopilot',       icon: Bot,         path: '/nexus/sentinel/autopilot' },
   { id: 'costs',        label: 'Couts',           icon: DollarSign,  path: '/nexus/sentinel/costs' },
   { id: 'security',     label: 'Securite',        icon: ShieldCheck, path: '/nexus/sentinel/security' },
   { id: 'intelligence', label: 'Intelligence',    icon: Brain,       path: '/nexus/sentinel/intelligence' },
   { id: 'backups',      label: 'Backups',         icon: HardDrive,   path: '/nexus/sentinel/backups' },
-  { id: 'console',      label: 'Console',         icon: Terminal,    path: '/nexus/sentinel/console' },
 ] as const;
 
 const TOP_ITEMS: MenuItem[] = [
