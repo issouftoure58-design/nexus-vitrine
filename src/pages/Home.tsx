@@ -37,17 +37,17 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/contact"
+                href="/demo"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-cyan-600 rounded-lg font-semibold text-lg hover:bg-gray-50 transition-all hover:scale-105 shadow-xl"
               >
-                Demarrer gratuitement 14 jours
+                🎬 Tester la démo interactive
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <Link
-                href="/features"
+                href="/pricing"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 rounded-lg font-semibold text-lg hover:bg-white/20 transition-all"
               >
-                Voir la demo
+                Voir les tarifs
               </Link>
             </div>
 
@@ -191,6 +191,63 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Demo Section */}
+      <section className="py-20 bg-gradient-to-br from-cyan-50 to-blue-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-100 text-cyan-700 rounded-full text-sm font-medium mb-4">
+              <Sparkles className="w-4 h-4" />
+              Démo interactive
+            </span>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Testez NEXUS en 2 minutes
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Explorez le dashboard, créez des réservations, discutez avec l'IA - le tout sans inscription
+            </p>
+          </div>
+
+          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+            <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex items-center gap-2">
+              <div className="flex gap-2">
+                <div className="w-3 h-3 bg-red-500 rounded-full" />
+                <div className="w-3 h-3 bg-yellow-500 rounded-full" />
+                <div className="w-3 h-3 bg-green-500 rounded-full" />
+              </div>
+              <span className="text-white/60 text-sm ml-4">nexus-vitrine.onrender.com/demo</span>
+            </div>
+            <div className="p-8 lg:p-12 bg-gradient-to-br from-slate-900 to-slate-800">
+              <div className="grid md:grid-cols-3 gap-6 mb-8">
+                <div className="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/10">
+                  <p className="text-white/60 text-sm mb-1">Chiffre d'affaires</p>
+                  <p className="text-3xl font-bold text-white">4 580€</p>
+                  <p className="text-emerald-400 text-sm">+12% ce mois</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/10">
+                  <p className="text-white/60 text-sm mb-1">Réservations</p>
+                  <p className="text-3xl font-bold text-white">47</p>
+                  <p className="text-emerald-400 text-sm">+8% ce mois</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/10">
+                  <p className="text-white/60 text-sm mb-1">Taux de remplissage</p>
+                  <p className="text-3xl font-bold text-white">87%</p>
+                  <p className="text-emerald-400 text-sm">+5% ce mois</p>
+                </div>
+              </div>
+              <div className="text-center">
+                <Link
+                  href="/demo"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl font-semibold text-lg hover:shadow-xl hover:shadow-cyan-500/25 transition-all hover:scale-105"
+                >
+                  🎬 Lancer la démo interactive
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Features Grid */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -300,18 +357,26 @@ export default function Home() {
       <section className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Pret a transformer votre business ?
+            Prêt à transformer votre business ?
           </h2>
           <p className="text-xl text-gray-600 mb-12">
-            Rejoignez NEXUS aujourd'hui. Sans engagement, sans carte bancaire.
+            Testez NEXUS maintenant. Sans engagement, sans carte bancaire.
           </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg font-semibold text-lg hover:shadow-xl transition-all hover:scale-105"
-          >
-            Demarrer Gratuitement
-            <ArrowRight className="w-5 h-5" />
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/demo"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg font-semibold text-lg hover:shadow-xl transition-all hover:scale-105"
+            >
+              🎬 Voir la démo
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold text-lg hover:border-gray-400 hover:bg-gray-50 transition-all"
+            >
+              Nous contacter
+            </Link>
+          </div>
           <p className="text-gray-500 mt-6">
             Installation en 30 minutes · Support inclus · Essai gratuit 14 jours
           </p>

@@ -129,21 +129,21 @@ export default function Features() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pb-20">
       {/* Hero */}
       <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-20">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <span className="inline-block px-4 py-2 bg-white/10 rounded-full text-sm font-medium mb-6">
-            9 modules metier
+            9 modules métier
           </span>
           <h1 className="text-4xl lg:text-5xl font-bold mb-6">
             Tout ce dont vous avez besoin<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
-              pour gerer votre activite
+              pour gérer votre activité
             </span>
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Des outils professionnels adaptes a votre plan. Commencez simple, evoluez selon vos besoins.
+            Des outils professionnels adaptés à votre plan. Commencez simple, évoluez selon vos besoins.
           </p>
         </div>
       </section>
@@ -220,26 +220,40 @@ export default function Features() {
       <section className="py-20 bg-gradient-to-br from-gray-900 to-gray-800">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
-            Pret a transformer votre activite ?
+            Prêt à transformer votre activité ?
           </h2>
           <p className="text-gray-400 mb-8">
-            Choisissez le plan qui vous correspond et commencez a gagner du temps des aujourd'hui.
+            Testez toutes ces fonctionnalités dans notre démo interactive
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/pricing">
-              <span className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 font-semibold rounded-xl hover:bg-gray-100 transition">
-                Voir les tarifs
+            <Link href="/demo">
+              <span className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-cyan-500/25 transition">
+                🎬 Lancer la démo
                 <ArrowRight className="w-5 h-5" />
               </span>
             </Link>
-            <Link href="/contact">
-              <span className="inline-flex items-center gap-2 px-8 py-4 border border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 transition">
-                Nous contacter
+            <Link href="/pricing">
+              <span className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 font-semibold rounded-xl hover:bg-gray-100 transition">
+                Voir les tarifs
               </span>
             </Link>
           </div>
         </div>
       </section>
+
+      {/* Sticky Demo CTA */}
+      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-cyan-600 to-blue-600 border-t border-cyan-400/20 shadow-2xl z-50">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <p className="text-white font-medium hidden sm:block">
+            Découvrez ces fonctionnalités en action
+          </p>
+          <Link href="/demo">
+            <span className="inline-flex items-center gap-2 px-6 py-2.5 bg-white text-cyan-600 font-semibold rounded-lg hover:bg-gray-100 transition">
+              🎬 Lancer la démo →
+            </span>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

@@ -109,6 +109,16 @@ export default function Pricing() {
   return (
     <div className="min-h-screen bg-gray-50" style={{ fontFamily: "'Inter', sans-serif" }}>
 
+      {/* Demo Banner */}
+      <div className="bg-gradient-to-r from-amber-500 to-orange-500 text-white">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-center gap-3 text-sm font-medium">
+          <span>⚡ Pas encore convaincu ?</span>
+          <Link href="/demo" className="underline underline-offset-2 hover:no-underline font-semibold">
+            Testez NEXUS gratuitement en 2 min →
+          </Link>
+        </div>
+      </div>
+
       {/* HERO */}
       <section className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -595,14 +605,22 @@ export default function Pricing() {
               Des questions sur nos tarifs ?
             </h3>
             <p className="text-gray-600 mb-6">
-              Notre équipe est là pour vous aider à choisir la meilleure formule
+              Testez NEXUS avant de décider, ou contactez notre équipe
             </p>
-            <Link
-              to="/contact"
-              className="inline-block px-8 py-3 rounded-lg font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:shadow-xl transition-all text-lg"
-            >
-              Réserver une démo
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/demo"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-lg font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:shadow-xl transition-all text-lg"
+              >
+                🎬 Voir la démo
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-lg font-semibold border-2 border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-gray-50 transition-all text-lg"
+              >
+                Nous contacter
+              </Link>
+            </div>
           </div>
         </div>
       </section>

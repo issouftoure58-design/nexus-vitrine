@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Check, Clock, MessageCircle } from 'lucide-react';
+import { Link } from 'wouter';
+import { Mail, Phone, MapPin, Send, Check, Clock, MessageCircle, Play } from 'lucide-react';
 
 const BUSINESS_TYPES = [
   { value: '', label: 'Selectionnez votre activite...' },
@@ -70,6 +71,28 @@ export default function Contact() {
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Une question ? Besoin d'une demo ? Notre equipe vous repond sous 24h.
           </p>
+        </div>
+      </section>
+
+      {/* Quick Demo Section */}
+      <section className="py-8 bg-gradient-to-r from-cyan-50 to-blue-50 border-b">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-white rounded-2xl p-6 shadow-sm border border-cyan-100">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                <Play className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h3 className="font-bold text-gray-900">Avant de nous contacter...</h3>
+                <p className="text-gray-600 text-sm">Testez NEXUS en 2 minutes, sans inscription</p>
+              </div>
+            </div>
+            <Link href="/demo">
+              <span className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg transition whitespace-nowrap">
+                🎬 Essayer la démo
+              </span>
+            </Link>
+          </div>
         </div>
       </section>
 
