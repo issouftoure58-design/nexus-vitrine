@@ -1,8 +1,16 @@
-import { Switch, Route, Link, useLocation } from 'wouter';
+import { Switch, Route, Link, useLocation, Redirect } from 'wouter';
 import Home from './pages/Home';
 import Pricing from './pages/Pricing';
 import Features from './pages/Features';
 import Contact from './pages/Contact';
+
+// NEXUS Operator Dashboard pages
+import NexusLogin from './pages/nexus/NexusLogin';
+import NexusDashboard from './pages/nexus/NexusDashboard';
+import NexusTenants from './pages/nexus/NexusTenants';
+import NexusSentinel from './pages/nexus/NexusSentinel';
+import NexusSettings from './pages/nexus/NexusSettings';
+import NexusBilling from './pages/nexus/NexusBilling';
 
 function Navbar() {
   const [location] = useLocation();
@@ -34,12 +42,11 @@ function Navbar() {
               </span>
             </Link>
           ))}
-          <a
-            href="https://app.nexus.app"
-            className="px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition"
-          >
-            Connexion
-          </a>
+          <Link href="/nexus/login">
+            <span className="px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition">
+              Connexion
+            </span>
+          </Link>
         </div>
       </div>
     </nav>
@@ -81,7 +88,60 @@ function Footer() {
   );
 }
 
+// Protected route for NEXUS operator dashboard
+function NexusProtectedRoute({ children }: { children: React.ReactNode }) {
+  const token = localStorage.getItem('admin_token');
+  const user = localStorage.getItem('admin_user');
+
+  if (!token || !user) {
+    return <Redirect to="/nexus/login" />;
+  }
+
+  try {
+    const userData = JSON.parse(user);
+    if (userData.role !== 'super_admin') {
+      return <Redirect to="/nexus/login" />;
+    }
+  } catch {
+    return <Redirect to="/nexus/login" />;
+  }
+
+  return <>{children}</>;
+}
+
 export default function App() {
+  const [location] = useLocation();
+
+  // NEXUS dashboard pages have their own layout (dark theme)
+  const isNexusRoute = location.startsWith('/nexus');
+
+  if (isNexusRoute) {
+    return (
+      <Switch>
+        <Route path="/nexus/login" component={NexusLogin} />
+        <Route path="/nexus/dashboard">
+          <NexusProtectedRoute><NexusDashboard /></NexusProtectedRoute>
+        </Route>
+        <Route path="/nexus/tenants">
+          <NexusProtectedRoute><NexusTenants /></NexusProtectedRoute>
+        </Route>
+        <Route path="/nexus/sentinel/:tab?">
+          <NexusProtectedRoute><NexusSentinel /></NexusProtectedRoute>
+        </Route>
+        <Route path="/nexus/settings">
+          <NexusProtectedRoute><NexusSettings /></NexusProtectedRoute>
+        </Route>
+        <Route path="/nexus/billing">
+          <NexusProtectedRoute><NexusBilling /></NexusProtectedRoute>
+        </Route>
+        <Route path="/nexus">
+          <Redirect to="/nexus/dashboard" />
+        </Route>
+      </Switch>
+    );
+  }
+
+  // Public commercial pages with Navbar/Footer
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
