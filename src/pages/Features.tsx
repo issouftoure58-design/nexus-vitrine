@@ -16,78 +16,188 @@ interface Module {
 const MODULES: Record<Plan, Module[]> = {
   starter: [
     {
-      id: 'reservations',
-      icon: '📅',
-      name: 'Réservations IA',
-      tagline: 'Prise de rendez-vous automatisée par IA',
-      description: 'Calendrier intelligent, rappels SMS, gestion des disponibilités en temps réel.',
+      id: 'facturation',
+      icon: '💰',
+      name: 'Facturation & Paiements',
+      tagline: 'Encaissez et facturez en ligne',
+      description: 'Création factures/devis, paiement Stripe, relances automatiques, export PDF.',
       features: [
-        'Calendrier intelligent',
-        'Rappels automatiques',
-        'Réservations 24/7'
+        'Factures & devis illimités',
+        'Paiement en ligne Stripe',
+        'Relances impayés (1 relance)',
+        'Export PDF'
       ]
     },
     {
-      id: 'paiements',
-      icon: '💳',
-      name: 'Paiements Stripe',
-      tagline: 'Encaissez en ligne avec Stripe',
-      description: 'Acomptes, paiements complets, facturation automatique et suivi en temps réel.',
+      id: 'clients',
+      icon: '👥',
+      name: 'CRM Clients Base',
+      tagline: 'Gérez vos contacts efficacement',
+      description: 'Fiches clients, historique factures, recherche rapide, import/export CSV.',
       features: [
-        'Stripe intégré',
-        'Facturation auto',
-        'Suivi paiements'
+        'Fiches clients complètes',
+        'Historique factures',
+        'Recherche & filtres',
+        'Import/Export CSV (500 max)'
+      ]
+    },
+    {
+      id: 'dashboard',
+      icon: '📊',
+      name: 'Dashboard & Stats',
+      tagline: 'Pilotez votre activité en temps réel',
+      description: 'CA jour/semaine/mois, top clients, factures impayées, graphiques.',
+      features: [
+        'CA en temps réel',
+        'Top 5 clients',
+        'Factures impayées',
+        'Graphique évolution (7j)'
+      ]
+    },
+    {
+      id: 'assistant-ia',
+      icon: '🤖',
+      name: 'Assistant Admin IA',
+      tagline: 'Votre copilote intelligent',
+      description: 'Chat IA qui répond à vos questions sur votre activité (lecture seule).',
+      features: [
+        'Questions activité',
+        'Suggestions actions',
+        'Historique 30 jours',
+        'Lecture seule (pas d\'exécution)'
+      ]
+    },
+    {
+      id: 'notifications',
+      icon: '🔔',
+      name: 'Notifications',
+      tagline: 'Restez informé automatiquement',
+      description: 'Emails automatiques pour factures payées, impayées, rappels.',
+      features: [
+        'Email facture payée',
+        'Rappel impayés J+7',
+        'Rappel hebdo activité',
+        '50 emails/mois inclus'
+      ]
+    },
+    {
+      id: 'documents',
+      icon: '📁',
+      name: 'Documents & Fichiers',
+      tagline: 'Centralisez vos fichiers',
+      description: 'Upload, rangement par client/projet, partage sécurisé.',
+      features: [
+        'Upload fichiers (500 MB)',
+        'Rangement par client',
+        'Partage lien sécurisé',
+        '50 fichiers max'
+      ]
+    },
+    {
+      id: 'sentinel-basic',
+      icon: '🛡️',
+      name: 'SENTINEL Monitor',
+      tagline: 'Surveillance système basique',
+      description: 'Uptime monitoring, logs 7 jours, alertes critiques.',
+      features: [
+        'Uptime monitoring',
+        'Logs 7 derniers jours',
+        'Alertes critiques',
+        'Dashboard santé'
       ]
     }
   ],
 
   pro: [
     {
-      id: 'crm',
-      icon: '👥',
-      name: 'CRM Clients',
-      tagline: 'Gérez votre relation client comme un pro',
-      description: 'Historique complet, préférences, segmentation et communication ciblée.',
+      id: 'comptabilite',
+      icon: '💼',
+      name: 'Comptabilité Complète',
+      tagline: 'Suivi financier professionnel',
+      description: 'TVA auto, bilan, compte résultat, export comptable expert.',
       features: [
-        'Fiches clients',
-        'Historique complet',
-        'Segmentation'
-      ]
-    },
-    {
-      id: 'compta',
-      icon: '💰',
-      name: 'Comptabilité',
-      tagline: 'Suivi financier simplifié',
-      description: 'Chiffre d\'affaires, dépenses, marges et export comptable en un clic.',
-      features: [
-        'Dashboard financier',
+        'TVA automatique',
+        'Bilan & compte résultat',
         'Export comptable',
-        'Suivi CA/marges'
+        'Rapprochement bancaire'
       ]
     },
     {
-      id: 'stock',
-      icon: '📦',
-      name: 'Stock & Inventaire',
-      tagline: 'Gérez vos produits et consommables',
-      description: 'Alertes de stock bas, commandes fournisseurs et valorisation.',
+      id: 'crm-advanced',
+      icon: '👔',
+      name: 'CRM Avancé',
+      tagline: 'Relation client optimisée',
+      description: 'Segmentation, tags, scoring, clients illimités.',
       features: [
-        'Gestion produits',
-        'Alertes stock',
-        'Valorisation'
+        'Clients illimités',
+        'Segmentation avancée',
+        'Tags personnalisés',
+        'Scoring A/B/C'
       ]
     },
     {
       id: 'marketing',
       icon: '📢',
       name: 'Marketing Automation',
-      tagline: 'Campagnes email et SMS automatisées',
-      description: 'Relance clients inactifs, promotions ciblées et fidélisation.',
+      tagline: 'Fidélisez automatiquement',
+      description: 'Campagnes email/SMS, relances auto, A/B testing.',
       features: [
-        'Campagnes auto',
-        'Relance clients',
-        'Promotions'
+        'Campagnes email/SMS',
+        'Relances auto intelligentes',
+        'A/B testing',
+        '1000 emails/mois'
+      ]
+    },
+    {
+      id: 'stock',
+      icon: '📦',
+      name: 'Stock & Inventaire',
+      tagline: 'Gérez vos produits',
+      description: 'Catalogue, alertes stock, commandes fournisseurs.',
+      features: [
+        'Catalogue produits',
+        'Alertes stock bas',
+        'Commandes fournisseurs',
+        'Valorisation stock'
+      ]
+    },
+    {
+      id: 'analytics',
+      icon: '📈',
+      name: 'Analytics Avancés',
+      tagline: 'Décisions data-driven',
+      description: 'Rapports personnalisés, exports Excel, prévisions IA.',
+      features: [
+        'Rapports personnalisés',
+        'Exports Excel/CSV',
+        'Prévisions IA',
+        'KPI métier'
+      ]
+    },
+    {
+      id: 'assistant-pro',
+      icon: '🤖',
+      name: 'Assistant Admin PRO',
+      tagline: 'IA qui agit pour vous',
+      description: 'Exécution d\'actions : créer factures, relancer clients, workflows auto.',
+      features: [
+        'Exécution actions',
+        'Workflows automatiques',
+        'Historique illimité',
+        'Suggestions proactives'
+      ]
+    },
+    {
+      id: 'sentinel-active',
+      icon: '🛡️',
+      name: 'SENTINEL Actif',
+      tagline: 'Optimisation intelligente',
+      description: 'Logs 30j, auto-optimisation coûts, détection anomalies.',
+      features: [
+        'Logs 30 jours',
+        'Auto-optimisation coûts',
+        'Détection anomalies',
+        'Recommandations IA'
       ]
     }
   ],
@@ -96,37 +206,79 @@ const MODULES: Record<Plan, Module[]> = {
     {
       id: 'seo',
       icon: '🔍',
-      name: 'SEO & Analytics',
-      tagline: 'Référencement Google optimisé',
-      description: 'Suivez vos performances et améliorez votre visibilité.',
+      name: 'SEO & Visibilité',
+      tagline: 'Dominez Google',
+      description: 'SEO automatisé, analytics avancés, rapports mensuels.',
       features: [
         'SEO automatisé',
         'Analytics avancés',
-        'Rapports mensuels'
+        'Rapports mensuels',
+        'Audit technique'
       ]
     },
     {
       id: 'rh',
       icon: '👔',
       name: 'RH & Planning',
-      tagline: 'Gestion des employés et planning d\'équipe',
-      description: 'Heures travaillées, absences et commissions.',
+      tagline: 'Gérez votre équipe',
+      description: 'Planning, heures travaillées, absences, commissions.',
       features: [
         'Planning équipe',
         'Suivi heures',
-        'Commissions'
+        'Gestion absences',
+        'Commissions auto'
       ]
     },
     {
       id: 'social',
       icon: '📱',
       name: 'Réseaux Sociaux IA',
-      tagline: 'Publication automatique sur Instagram, Facebook',
-      description: 'Génération de contenu IA et programmation intelligente.',
+      tagline: 'Présence automatique',
+      description: 'Posts auto Instagram/Facebook, contenu IA, programmation.',
       features: [
         'Posts automatiques',
-        'Contenu IA',
-        'Multi-plateformes'
+        'Génération contenu IA',
+        'Multi-plateformes',
+        'Analytics social'
+      ]
+    },
+    {
+      id: 'whitelabel',
+      icon: '🎨',
+      name: 'White-Label',
+      tagline: 'Votre marque uniquement',
+      description: 'Interface personnalisée, domaine custom, logo.',
+      features: [
+        'Interface personnalisée',
+        'Domaine custom',
+        'Logo & couleurs',
+        'Email personnalisé'
+      ]
+    },
+    {
+      id: 'api',
+      icon: '🔌',
+      name: 'API & Intégrations',
+      tagline: 'Connectez tout',
+      description: 'API REST complète, webhooks, intégrations tierces.',
+      features: [
+        'API REST complète',
+        'Webhooks',
+        'Intégrations tierces',
+        'Documentation dev'
+      ]
+    },
+    {
+      id: 'sentinel-intelligence',
+      icon: '🛡️',
+      name: 'SENTINEL Intelligence',
+      tagline: 'IA de surveillance avancée',
+      description: 'Veille concurrentielle, auto-repair, prédictions business.',
+      features: [
+        'Veille concurrentielle',
+        'Auto-repair système',
+        'Prédictions business',
+        'Alerting avancé'
       ]
     }
   ]
@@ -194,7 +346,7 @@ export default function Features() {
         <div className="section-header">
           <div className="section-indicator starter" />
           <h2>Modules Starter</h2>
-          <p>L'essentiel pour démarrer</p>
+          <p>7 modules universels pour tous les business</p>
         </div>
 
         <div className="modules-grid">
@@ -209,7 +361,7 @@ export default function Features() {
         <div className="section-header">
           <div className="section-indicator pro" />
           <h2>Modules Pro</h2>
-          <p>Pour aller plus loin</p>
+          <p>7 modules supplémentaires pour automatiser et croître</p>
           {activePlan === 'starter' && (
             <span className="upgrade-hint">Passez au plan Pro pour débloquer</span>
           )}
@@ -227,7 +379,7 @@ export default function Features() {
         <div className="section-header">
           <div className="section-indicator business" />
           <h2>Modules Business</h2>
-          <p>La puissance totale</p>
+          <p>6 modules pour scaler et dominer</p>
           {activePlan !== 'business' && (
             <span className="upgrade-hint">Passez au plan Business pour débloquer</span>
           )}
@@ -250,11 +402,12 @@ export default function Features() {
           <div className="option-card">
             <div className="option-icon">🤖</div>
             <h3>Agent Réservation IA</h3>
-            <p>Un réceptionniste virtuel 24/7</p>
+            <p>Un réceptionniste virtuel 24/7 pour les métiers à RDV</p>
             <div className="option-channels">
               <span>💬 Web : 29€/mois</span>
               <span>📱 WhatsApp : 39€/mois</span>
               <span>☎️ Téléphone : 99€/mois</span>
+              <span className="highlight">📦 Pack 3 canaux : 149€/mois</span>
             </div>
             <Link href="/pricing" className="option-link">
               Voir les détails →
@@ -271,6 +424,7 @@ export default function Features() {
               <span className="price">596€</span>
               <span className="original">1,490€</span>
             </div>
+            <div className="option-note">-60% avec Business (engagement 12 mois)</div>
             <Link href="/pricing" className="option-link">
               Voir les offres →
             </Link>
