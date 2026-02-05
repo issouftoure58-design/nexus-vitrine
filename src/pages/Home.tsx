@@ -4,24 +4,79 @@ import {
   ArrowRight, Check, Star, Sparkles, X, Clock,
   CreditCard, Phone, MessageSquare
 } from 'lucide-react';
-import AnimatedHero from '../components/AnimatedHero';
-import '../components/AnimatedHero.css';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white font-sans" style={{ fontFamily: "'Inter', sans-serif" }}>
-      {/* Hero Animé Cinématique - Full viewport */}
-      <AnimatedHero />
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-700">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-300 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        </div>
 
-      {/* Séparateur visuel vers contenu blanc */}
-      <div className="relative -mt-1">
-        <svg viewBox="0 0 1440 120" className="w-full h-auto">
-          <path
-            fill="#ffffff"
-            d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"
-          />
-        </svg>
-      </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm mb-8">
+              <Sparkles className="w-4 h-4" />
+              <span>L'assistant IA qui transforme votre business</span>
+            </div>
+
+            <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6">
+              NEXUS
+              <br />
+              <span className="bg-gradient-to-r from-yellow-200 to-pink-200 bg-clip-text text-transparent">
+                Automatisez votre activite
+              </span>
+            </h1>
+
+            <p className="text-xl lg:text-2xl text-white/90 mb-12 max-w-3xl mx-auto">
+              Automatisez vos reservations, paiements et gestion client en 30 minutes.
+              Un assistant IA disponible 24/7 pour vos clients.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/demo"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-cyan-600 rounded-lg font-semibold text-lg hover:bg-gray-50 transition-all hover:scale-105 shadow-xl"
+              >
+                Tester la demo interactive
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              <Link
+                href="/pricing"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 rounded-lg font-semibold text-lg hover:bg-white/20 transition-all"
+              >
+                Voir les tarifs
+              </Link>
+            </div>
+
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-white/80">
+              <div className="flex items-center gap-2">
+                <Check className="w-5 h-5" />
+                <span>Sans carte bancaire</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-5 h-5" />
+                <span>Installation 30 min</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-5 h-5" />
+                <span>Support 7j/7</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg viewBox="0 0 1440 120" className="w-full h-auto">
+            <path
+              fill="#ffffff"
+              d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"
+            />
+          </svg>
+        </div>
+      </section>
 
       {/* Temoignage Fatou - Section Vedette */}
       <section className="py-20 bg-white">
@@ -70,7 +125,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Avant / Apres (version compacte) */}
+      {/* Avant / Apres */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
