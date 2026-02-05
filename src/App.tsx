@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Switch, Route, Link, useLocation, Redirect } from 'wouter';
 import Home from './pages/Home';
 import Pricing from './pages/Pricing';
@@ -15,50 +16,101 @@ import NexusBilling from './pages/nexus/NexusBilling';
 
 function Navbar() {
   const [location] = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navLinks = [
+    { href: '/', label: 'Accueil' },
+    { href: '/features', label: 'Fonctionnalités' },
+    { href: '/demo', label: 'Démo Live', highlight: true },
+    { href: '/pricing', label: 'Tarifs' },
+    { href: '/contact', label: 'Contact' },
+  ];
 
   return (
     <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b">
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
         <Link href="/">
           <span className="text-xl font-bold tracking-tight">NEXUS</span>
         </Link>
-        <div className="flex items-center gap-6">
-          <Link href="/">
-            <span className={`text-sm font-medium transition ${location === '/' ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'}`}>
-              Accueil
-            </span>
-          </Link>
-          <Link href="/features">
-            <span className={`text-sm font-medium transition ${location === '/features' ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'}`}>
-              Fonctionnalités
-            </span>
-          </Link>
-          <Link href="/demo">
-            <span className={`inline-flex items-center gap-1.5 text-sm font-medium transition ${location === '/demo' ? 'text-cyan-600' : 'text-cyan-600 hover:text-cyan-700'}`}>
-              <span>🎬</span>
-              Démo Live
-              <span className="px-1.5 py-0.5 text-[10px] font-bold bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-full">
-                NOUVEAU
-              </span>
-            </span>
-          </Link>
-          <Link href="/pricing">
-            <span className={`text-sm font-medium transition ${location === '/pricing' ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'}`}>
-              Tarifs
-            </span>
-          </Link>
-          <Link href="/contact">
-            <span className={`text-sm font-medium transition ${location === '/contact' ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'}`}>
-              Contact
-            </span>
-          </Link>
+
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-6">
+          {navLinks.map(link => (
+            <Link key={link.href} href={link.href}>
+              {link.highlight ? (
+                <span className={`inline-flex items-center gap-1.5 text-sm font-medium transition ${location === link.href ? 'text-cyan-600' : 'text-cyan-600 hover:text-cyan-700'}`}>
+                  <span>🎬</span>
+                  {link.label}
+                  <span className="px-1.5 py-0.5 text-[10px] font-bold bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-full">
+                    NOUVEAU
+                  </span>
+                </span>
+              ) : (
+                <span className={`text-sm font-medium transition ${location === link.href ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'}`}>
+                  {link.label}
+                </span>
+              )}
+            </Link>
+          ))}
           <Link href="/nexus/login">
             <span className="px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition">
               Connexion
             </span>
           </Link>
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden p-2 text-gray-600 hover:text-gray-900 transition"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          {mobileMenuOpen ? (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-white border-t">
+          <div className="px-4 py-4 space-y-3">
+            {navLinks.map(link => (
+              <Link key={link.href} href={link.href}>
+                <span
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`block py-2 text-base font-medium transition ${
+                    location === link.href
+                      ? link.highlight ? 'text-cyan-600' : 'text-gray-900'
+                      : link.highlight ? 'text-cyan-600' : 'text-gray-500'
+                  }`}
+                >
+                  {link.highlight && <span className="mr-2">🎬</span>}
+                  {link.label}
+                  {link.highlight && (
+                    <span className="ml-2 px-1.5 py-0.5 text-[10px] font-bold bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-full">
+                      NOUVEAU
+                    </span>
+                  )}
+                </span>
+              </Link>
+            ))}
+            <Link href="/nexus/login">
+              <span
+                onClick={() => setMobileMenuOpen(false)}
+                className="block w-full text-center px-4 py-3 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition mt-4"
+              >
+                Connexion
+              </span>
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

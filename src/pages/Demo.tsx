@@ -363,12 +363,59 @@ function ClientMode() {
 
 function AdminMode() {
   const [tab, setTab] = useState<'dashboard' | 'reservations' | 'analytics'>('dashboard');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const NavContent = () => (
+    <>
+      <nav className="space-y-1 flex-1">
+        <button
+          onClick={() => { setTab('dashboard'); setSidebarOpen(false); }}
+          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition ${
+            tab === 'dashboard' ? 'bg-cyan-600 text-white' : 'text-white/60 hover:bg-white/5 hover:text-white'
+          }`}
+        >
+          <span>📊</span>
+          <span>Dashboard</span>
+        </button>
+        <button
+          onClick={() => { setTab('reservations'); setSidebarOpen(false); }}
+          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition ${
+            tab === 'reservations' ? 'bg-cyan-600 text-white' : 'text-white/60 hover:bg-white/5 hover:text-white'
+          }`}
+        >
+          <span>📅</span>
+          <span>Réservations</span>
+        </button>
+        <button
+          onClick={() => { setTab('analytics'); setSidebarOpen(false); }}
+          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition ${
+            tab === 'analytics' ? 'bg-cyan-600 text-white' : 'text-white/60 hover:bg-white/5 hover:text-white'
+          }`}
+        >
+          <span>📈</span>
+          <span>Analytics</span>
+        </button>
+      </nav>
+
+      <div className="mt-auto pt-4 border-t border-white/10">
+        <div className="px-3 py-2 bg-amber-500/20 rounded-lg border border-amber-500/30">
+          <p className="text-amber-300 text-xs font-medium">Mode Démo</p>
+          <p className="text-amber-200/60 text-[10px]">Données fictives</p>
+        </div>
+        <Link href="/pricing">
+          <span className="mt-3 block w-full text-center px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-medium rounded-lg hover:shadow-lg transition">
+            Essayer gratuitement →
+          </span>
+        </Link>
+      </div>
+    </>
+  );
 
   return (
-    <div className="flex max-w-7xl mx-auto bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border border-white/10">
-      {/* Sidebar */}
-      <div className="w-64 bg-slate-950 p-4 flex flex-col">
-        <div className="flex items-center gap-3 mb-8 px-2">
+    <div className="max-w-7xl mx-auto bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+      {/* Mobile Header */}
+      <div className="lg:hidden flex items-center justify-between p-4 border-b border-white/10 bg-slate-950">
+        <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center text-white font-bold">
             N
           </div>
@@ -377,55 +424,42 @@ function AdminMode() {
             <span className="text-cyan-400 text-xs block">Pro Dashboard</span>
           </div>
         </div>
-
-        <nav className="space-y-1 flex-1">
-          <button
-            onClick={() => setTab('dashboard')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition ${
-              tab === 'dashboard' ? 'bg-cyan-600 text-white' : 'text-white/60 hover:bg-white/5 hover:text-white'
-            }`}
-          >
-            <span>📊</span>
-            <span>Dashboard</span>
-          </button>
-          <button
-            onClick={() => setTab('reservations')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition ${
-              tab === 'reservations' ? 'bg-cyan-600 text-white' : 'text-white/60 hover:bg-white/5 hover:text-white'
-            }`}
-          >
-            <span>📅</span>
-            <span>Réservations</span>
-          </button>
-          <button
-            onClick={() => setTab('analytics')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition ${
-              tab === 'analytics' ? 'bg-cyan-600 text-white' : 'text-white/60 hover:bg-white/5 hover:text-white'
-            }`}
-          >
-            <span>📈</span>
-            <span>Analytics</span>
-          </button>
-        </nav>
-
-        <div className="mt-auto pt-4 border-t border-white/10">
-          <div className="px-3 py-2 bg-amber-500/20 rounded-lg border border-amber-500/30">
-            <p className="text-amber-300 text-xs font-medium">Mode Démo</p>
-            <p className="text-amber-200/60 text-[10px]">Données fictives</p>
-          </div>
-          <Link href="/pricing">
-            <span className="mt-3 block w-full text-center px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-medium rounded-lg hover:shadow-lg transition">
-              Essayer gratuitement →
-            </span>
-          </Link>
-        </div>
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="p-2 bg-white/10 rounded-lg text-white hover:bg-white/20 transition"
+        >
+          {sidebarOpen ? '✕' : '☰'}
+        </button>
       </div>
 
-      {/* Main Content */}
-      <div className="flex-1 p-6 overflow-auto max-h-[600px]">
-        {tab === 'dashboard' && <DashboardTab />}
-        {tab === 'reservations' && <ReservationsTab />}
-        {tab === 'analytics' && <AnalyticsTab />}
+      {/* Mobile Navigation Dropdown */}
+      {sidebarOpen && (
+        <div className="lg:hidden bg-slate-950 p-4 border-b border-white/10">
+          <NavContent />
+        </div>
+      )}
+
+      <div className="flex">
+        {/* Desktop Sidebar */}
+        <div className="hidden lg:flex w-64 bg-slate-950 p-4 flex-col min-h-[600px]">
+          <div className="flex items-center gap-3 mb-8 px-2">
+            <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center text-white font-bold">
+              N
+            </div>
+            <div>
+              <span className="text-white font-bold">NEXUS</span>
+              <span className="text-cyan-400 text-xs block">Pro Dashboard</span>
+            </div>
+          </div>
+          <NavContent />
+        </div>
+
+        {/* Main Content */}
+        <div className="flex-1 p-4 lg:p-6 overflow-auto max-h-[600px]">
+          {tab === 'dashboard' && <DashboardTab />}
+          {tab === 'reservations' && <ReservationsTab />}
+          {tab === 'analytics' && <AnalyticsTab />}
+        </div>
       </div>
     </div>
   );
@@ -468,14 +502,14 @@ function DashboardTab() {
       </div>
 
       {/* Quick Actions */}
-      <div className="flex gap-3">
-        <button className="flex-1 px-4 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white text-sm font-medium transition flex items-center justify-center gap-2">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <button className="px-4 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white text-sm font-medium transition flex items-center justify-center gap-2">
           <span>➕</span> Nouveau RDV
         </button>
-        <button className="flex-1 px-4 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white text-sm font-medium transition flex items-center justify-center gap-2">
+        <button className="px-4 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white text-sm font-medium transition flex items-center justify-center gap-2">
           <span>👤</span> Ajouter client
         </button>
-        <button className="flex-1 px-4 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white text-sm font-medium transition flex items-center justify-center gap-2">
+        <button className="px-4 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white text-sm font-medium transition flex items-center justify-center gap-2">
           <span>📊</span> Stats complètes
         </button>
       </div>
@@ -511,31 +545,31 @@ function ReservationsTab() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-white mb-1">Réservations</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-white mb-1">Réservations</h1>
           <p className="text-white/50 text-sm">{DEMO_RESERVATIONS.length} rendez-vous</p>
         </div>
-        <button className="px-4 py-2 bg-cyan-600 text-white rounded-lg text-sm font-medium hover:bg-cyan-500 transition">
+        <button className="px-4 py-2 bg-cyan-600 text-white rounded-lg text-sm font-medium hover:bg-cyan-500 transition w-full sm:w-auto">
           + Nouveau RDV
         </button>
       </div>
 
       {/* Filters */}
-      <div className="flex gap-2">
+      <div className="flex gap-2 overflow-x-auto pb-2">
         {(['today', 'week', 'month'] as const).map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
+            className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition whitespace-nowrap ${
               filter === f
                 ? 'bg-cyan-600 text-white'
                 : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white'
             }`}
           >
             {f === 'today' && "Aujourd'hui"}
-            {f === 'week' && 'Cette semaine'}
-            {f === 'month' && 'Ce mois'}
+            {f === 'week' && 'Semaine'}
+            {f === 'month' && 'Mois'}
           </button>
         ))}
       </div>
@@ -543,32 +577,45 @@ function ReservationsTab() {
       {/* Reservations List */}
       <div className="space-y-3">
         {DEMO_RESERVATIONS.map((rdv) => (
-          <div key={rdv.id} className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-4">
-            <div className="w-16 text-center">
-              <p className="text-cyan-400 font-bold text-lg">{rdv.time}</p>
-            </div>
-            <div className="flex-1">
-              <p className="text-white font-semibold">{rdv.client}</p>
-              <p className="text-white/60 text-sm">{rdv.service}</p>
-              <p className="text-white/40 text-xs mt-1">{rdv.phone}</p>
-            </div>
-            <div className="text-right">
-              <p className="text-white font-semibold">{rdv.price}€</p>
-              <span className={`inline-block mt-1 px-2 py-1 rounded-full text-xs ${
-                rdv.status === 'confirmed'
-                  ? 'bg-emerald-500/20 text-emerald-400'
-                  : 'bg-amber-500/20 text-amber-400'
-              }`}>
-                {rdv.status === 'confirmed' ? '✓ Confirmé' : '⏳ En attente'}
-              </span>
-            </div>
-            <div className="flex gap-2">
-              <button className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-white/60 hover:text-white transition">
-                ✏️
-              </button>
-              <button className="p-2 bg-white/5 hover:bg-red-500/20 rounded-lg text-white/60 hover:text-red-400 transition">
-                🗑️
-              </button>
+          <div key={rdv.id} className="bg-white/5 rounded-xl p-4 border border-white/10">
+            <div className="flex items-start gap-3">
+              <div className="w-14 text-center flex-shrink-0">
+                <p className="text-cyan-400 font-bold text-lg">{rdv.time}</p>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-white font-semibold truncate">{rdv.client}</p>
+                <p className="text-white/60 text-sm">{rdv.service}</p>
+                <p className="text-white/40 text-xs mt-1 sm:hidden">{rdv.phone}</p>
+                <div className="flex items-center gap-2 mt-2 sm:hidden">
+                  <span className="text-white font-semibold">{rdv.price}€</span>
+                  <span className={`px-2 py-1 rounded-full text-xs ${
+                    rdv.status === 'confirmed'
+                      ? 'bg-emerald-500/20 text-emerald-400'
+                      : 'bg-amber-500/20 text-amber-400'
+                  }`}>
+                    {rdv.status === 'confirmed' ? '✓' : '⏳'}
+                  </span>
+                </div>
+              </div>
+              <p className="text-white/40 text-xs hidden sm:block">{rdv.phone}</p>
+              <div className="text-right hidden sm:block">
+                <p className="text-white font-semibold">{rdv.price}€</p>
+                <span className={`inline-block mt-1 px-2 py-1 rounded-full text-xs ${
+                  rdv.status === 'confirmed'
+                    ? 'bg-emerald-500/20 text-emerald-400'
+                    : 'bg-amber-500/20 text-amber-400'
+                }`}>
+                  {rdv.status === 'confirmed' ? '✓ Confirmé' : '⏳ En attente'}
+                </span>
+              </div>
+              <div className="flex gap-1 flex-shrink-0">
+                <button className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-white/60 hover:text-white transition">
+                  ✏️
+                </button>
+                <button className="p-2 bg-white/5 hover:bg-red-500/20 rounded-lg text-white/60 hover:text-red-400 transition">
+                  🗑️
+                </button>
+              </div>
             </div>
           </div>
         ))}
@@ -582,9 +629,9 @@ function AnalyticsTab() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white mb-1">Analytics</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-white mb-1">Analytics</h1>
           <p className="text-white/50 text-sm">Suivez vos performances</p>
         </div>
         <div className="flex gap-2">
@@ -592,15 +639,15 @@ function AnalyticsTab() {
             <button
               key={p}
               onClick={() => setPeriod(p)}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${
+              className={`px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition ${
                 period === p
                   ? 'bg-cyan-600 text-white'
                   : 'bg-white/5 text-white/60 hover:bg-white/10'
               }`}
             >
-              {p === '7d' && '7 jours'}
-              {p === '30d' && '30 jours'}
-              {p === '90d' && '90 jours'}
+              {p === '7d' && '7j'}
+              {p === '30d' && '30j'}
+              {p === '90d' && '90j'}
             </button>
           ))}
         </div>
@@ -638,18 +685,18 @@ function AnalyticsTab() {
       </div>
 
       {/* Quick Stats */}
-      <div className="grid grid-cols-3 gap-4">
-        <div className="bg-white/5 rounded-xl p-4 border border-white/10 text-center">
-          <p className="text-2xl font-bold text-white">73%</p>
-          <p className="text-white/50 text-sm">Taux de conversion</p>
+      <div className="grid grid-cols-3 gap-2 sm:gap-4">
+        <div className="bg-white/5 rounded-xl p-3 sm:p-4 border border-white/10 text-center">
+          <p className="text-xl sm:text-2xl font-bold text-white">73%</p>
+          <p className="text-white/50 text-[10px] sm:text-sm">Conversion</p>
         </div>
-        <div className="bg-white/5 rounded-xl p-4 border border-white/10 text-center">
-          <p className="text-2xl font-bold text-white">4.8</p>
-          <p className="text-white/50 text-sm">Note moyenne</p>
+        <div className="bg-white/5 rounded-xl p-3 sm:p-4 border border-white/10 text-center">
+          <p className="text-xl sm:text-2xl font-bold text-white">4.8</p>
+          <p className="text-white/50 text-[10px] sm:text-sm">Note</p>
         </div>
-        <div className="bg-white/5 rounded-xl p-4 border border-white/10 text-center">
-          <p className="text-2xl font-bold text-white">12%</p>
-          <p className="text-white/50 text-sm">Nouveaux clients</p>
+        <div className="bg-white/5 rounded-xl p-3 sm:p-4 border border-white/10 text-center">
+          <p className="text-xl sm:text-2xl font-bold text-white">12%</p>
+          <p className="text-white/50 text-[10px] sm:text-sm">Nouveaux</p>
         </div>
       </div>
     </div>

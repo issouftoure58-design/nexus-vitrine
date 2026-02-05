@@ -129,14 +129,14 @@ export default function Pricing() {
       </div>
 
       {/* HERO */}
-      <section className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-20">
+      <section className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-12 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold mb-4">Tarifs NEXUS</h1>
-          <p className="text-xl mb-8 opacity-90">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Tarifs NEXUS</h1>
+          <p className="text-base sm:text-xl mb-6 sm:mb-8 opacity-90">
             Transparent, simple, et adapté à votre croissance
           </p>
-          <div className="inline-flex items-center bg-white/20 rounded-lg px-6 py-3">
-            <span className="text-lg">Essai gratuit 14 jours &mdash; Sans carte bancaire</span>
+          <div className="inline-flex items-center bg-white/20 rounded-lg px-4 sm:px-6 py-2 sm:py-3">
+            <span className="text-sm sm:text-lg">Essai gratuit 14 jours — Sans carte bancaire</span>
           </div>
         </div>
       </section>
@@ -330,7 +330,7 @@ export default function Pricing() {
 
           {/* Comparatif des 4 options */}
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
               {/* Option Business A : -60% avec engagement */}
               <button
