@@ -1,29 +1,57 @@
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Check } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Check, Clock, MessageCircle } from 'lucide-react';
+
+const BUSINESS_TYPES = [
+  { value: '', label: 'Selectionnez votre activite...' },
+  { value: 'coiffure', label: 'Coiffure / Barbier' },
+  { value: 'beaute', label: 'Institut de beaute / Spa' },
+  { value: 'restaurant', label: 'Restaurant / Cafe' },
+  { value: 'hotel', label: 'Hotel / Hebergement' },
+  { value: 'sante', label: 'Sante / Bien-etre' },
+  { value: 'commerce', label: 'Commerce / Boutique' },
+  { value: 'service', label: 'Service a domicile' },
+  { value: 'autre', label: 'Autre' },
+];
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', business: '', message: '' });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    business: '',
+    message: ''
+  });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Envoyer à API
+    setLoading(true);
+    // Simulation envoi (TODO: connecter a l'API)
+    await new Promise(resolve => setTimeout(resolve, 1000));
     console.log('Form data:', formData);
+    setLoading(false);
     setSubmitted(true);
   };
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center py-24 px-4" style={{ fontFamily: "'Inter', sans-serif" }}>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center py-24 px-4">
         <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-lg text-center">
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <Check className="w-8 h-8 text-green-600" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Message envoyé !</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Message envoye !</h2>
           <p className="text-gray-600 mb-6">
-            Nous vous recontactons sous 24h pour planifier votre démo personnalisée.
+            Nous vous recontactons sous 24h pour planifier votre demo personnalisee.
           </p>
-          <button onClick={() => setSubmitted(false)} className="text-cyan-600 hover:text-cyan-700 font-medium">
+          <button
+            onClick={() => {
+              setSubmitted(false);
+              setFormData({ name: '', email: '', phone: '', business: '', message: '' });
+            }}
+            className="text-blue-600 hover:text-blue-700 font-medium"
+          >
             Envoyer un autre message
           </button>
         </div>
@@ -32,121 +60,188 @@ export default function Contact() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-24" style={{ fontFamily: "'Inter', sans-serif" }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">Contactez-nous</h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Une question ? Besoin d'une démo ? Notre équipe est là pour vous accompagner.
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero */}
+      <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-20">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h1 className="text-4xl lg:text-5xl font-bold mb-6">
+            Parlons de votre projet
+          </h1>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            Une question ? Besoin d'une demo ? Notre equipe vous repond sous 24h.
           </p>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
-          <div>
-            <h2 className="text-2xl font-bold mb-6">Parlons de votre projet</h2>
+      {/* Content */}
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid lg:grid-cols-5 gap-12">
+            {/* Contact Info - 2 colonnes */}
+            <div className="lg:col-span-2 space-y-8">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Nos coordonnees</h2>
+                <div className="space-y-4">
+                  <a
+                    href="mailto:contact@nexus-platform.fr"
+                    className="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all"
+                  >
+                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Mail className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-gray-500">Email</div>
+                      <div className="font-medium text-gray-900">contact@nexus-platform.fr</div>
+                    </div>
+                  </a>
 
-            <div className="space-y-6 mb-8">
-              {[
-                { icon: Mail, label: 'Email', value: 'contact@nexus.ai', href: 'mailto:contact@nexus.ai' },
-                { icon: Phone, label: 'Téléphone', value: '07 82 23 50 20', href: 'tel:+33782235020' },
-                { icon: MapPin, label: 'Adresse', value: 'Paris, Île-de-France', href: '' },
-              ].map((c, i) => (
-                <div key={i} className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <c.icon className="w-6 h-6 text-cyan-600" />
+                  <a
+                    href="tel:+33782235020"
+                    className="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all"
+                  >
+                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Phone className="w-5 h-5 text-green-600" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-gray-500">Telephone</div>
+                      <div className="font-medium text-gray-900">07 82 23 50 20</div>
+                    </div>
+                  </a>
+
+                  <div className="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-200">
+                    <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-5 h-5 text-purple-600" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-gray-500">Localisation</div>
+                      <div className="font-medium text-gray-900">Paris, Ile-de-France</div>
+                    </div>
                   </div>
+                </div>
+              </div>
+
+              {/* Info box */}
+              <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-2xl text-white">
+                <h3 className="text-lg font-bold mb-4">Pourquoi nous contacter ?</h3>
+                <ul className="space-y-3">
+                  {[
+                    { icon: MessageCircle, text: 'Demo personnalisee gratuite' },
+                    { icon: Clock, text: 'Reponse sous 24h garantie' },
+                    { icon: Check, text: 'Conseil adapte a votre activite' },
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center gap-3">
+                      <item.icon className="w-5 h-5 text-blue-400 flex-shrink-0" />
+                      <span className="text-gray-300">{item.text}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Form - 3 colonnes */}
+            <div className="lg:col-span-3">
+              <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                <h2 className="text-xl font-bold text-gray-900 mb-6">Envoyez-nous un message</h2>
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Nom complet <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.name}
+                        onChange={e => setFormData({ ...formData, name: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                        placeholder="Jean Dupont"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Email <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={e => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                        placeholder="jean@exemple.fr"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Telephone
+                      </label>
+                      <input
+                        type="tel"
+                        value={formData.phone}
+                        onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                        placeholder="06 12 34 56 78"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Type d'activite
+                      </label>
+                      <select
+                        value={formData.business}
+                        onChange={e => setFormData({ ...formData, business: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition bg-white"
+                      >
+                        {BUSINESS_TYPES.map(type => (
+                          <option key={type.value} value={type.value}>{type.label}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
                   <div>
-                    <div className="font-semibold mb-1">{c.label}</div>
-                    {c.href ? (
-                      <a href={c.href} className="text-cyan-600 hover:text-cyan-700">{c.value}</a>
-                    ) : (
-                      <div className="text-gray-600">{c.value}</div>
-                    )}
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Message <span className="text-red-500">*</span>
+                    </label>
+                    <textarea
+                      required
+                      value={formData.message}
+                      onChange={e => setFormData({ ...formData, message: e.target.value })}
+                      rows={5}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none outline-none transition"
+                      placeholder="Decrivez votre projet ou posez vos questions..."
+                    />
                   </div>
-                </div>
-              ))}
-            </div>
 
-            <div className="bg-gradient-to-br from-cyan-500 to-blue-600 p-8 rounded-2xl text-white">
-              <h3 className="text-xl font-bold mb-4">Démo Gratuite</h3>
-              <p className="mb-6">Découvrez NEXUS en action avec une démo personnalisée de 30 minutes.</p>
-              <ul className="space-y-2">
-                {['Sans engagement', 'Adaptée à votre activité', 'Questions/réponses en direct'].map((t, i) => (
-                  <li key={i} className="flex items-center gap-2">
-                    <Check className="w-5 h-5" />
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gray-900 text-white rounded-xl font-semibold hover:bg-gray-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {loading ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Envoi en cours...
+                      </>
+                    ) : (
+                      <>
+                        Envoyer le message
+                        <Send className="w-5 h-5" />
+                      </>
+                    )}
+                  </button>
 
-          {/* Form */}
-          <div className="bg-white p-8 rounded-2xl shadow-lg">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {[
-                { id: 'name', label: 'Nom complet *', type: 'text', required: true, placeholder: 'Jean Dupont' },
-                { id: 'email', label: 'Email *', type: 'email', required: true, placeholder: 'jean@exemple.fr' },
-                { id: 'phone', label: 'Téléphone', type: 'tel', required: false, placeholder: '06 12 34 56 78' },
-              ].map(f => (
-                <div key={f.id}>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">{f.label}</label>
-                  <input
-                    type={f.type}
-                    required={f.required}
-                    value={(formData as any)[f.id]}
-                    onChange={e => setFormData({ ...formData, [f.id]: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
-                    placeholder={f.placeholder}
-                  />
-                </div>
-              ))}
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Type d'activité</label>
-                <select
-                  value={formData.business}
-                  onChange={e => setFormData({ ...formData, business: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
-                >
-                  <option value="">Sélectionnez...</option>
-                  <option value="coiffure">Salon de coiffure</option>
-                  <option value="beaute">Institut de beauté</option>
-                  <option value="restaurant">Restaurant</option>
-                  <option value="hotel">Hôtel</option>
-                  <option value="commerce">Commerce</option>
-                  <option value="autre">Autre</option>
-                </select>
+                  <p className="text-xs text-gray-500 text-center">
+                    En envoyant ce formulaire, vous acceptez d'etre recontacte par notre equipe.
+                  </p>
+                </form>
               </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Message *</label>
-                <textarea
-                  required
-                  value={formData.message}
-                  onChange={e => setFormData({ ...formData, message: e.target.value })}
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent resize-none outline-none"
-                  placeholder="Parlez-nous de votre projet..."
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg font-semibold hover:shadow-xl transition-all hover:scale-105"
-              >
-                Envoyer le message
-                <Send className="w-5 h-5" />
-              </button>
-
-              <p className="text-xs text-gray-500 text-center">
-                En envoyant ce formulaire, vous acceptez d'être recontacté par notre équipe.
-              </p>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

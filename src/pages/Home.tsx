@@ -1,7 +1,8 @@
 import { Link } from 'wouter';
 import {
   Bot, Zap, Shield, TrendingUp, Calendar,
-  ArrowRight, Check, Star, Sparkles
+  ArrowRight, Check, Star, Sparkles, X, Clock,
+  CreditCard, Phone, MessageSquare
 } from 'lucide-react';
 
 export default function Home() {
@@ -18,20 +19,20 @@ export default function Home() {
           <div className="text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm mb-8">
               <Sparkles className="w-4 h-4" />
-              <span>L'IA qui fait tourner votre business</span>
+              <span>L'assistant IA qui transforme votre business</span>
             </div>
 
-            <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
+            <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6">
               NEXUS
               <br />
               <span className="bg-gradient-to-r from-yellow-200 to-pink-200 bg-clip-text text-transparent">
-                Votre Business en Autopilote
+                Automatisez votre activite
               </span>
             </h1>
 
             <p className="text-xl lg:text-2xl text-white/90 mb-12 max-w-3xl mx-auto">
-              Des agents IA qui gèrent vos réservations, répondent à vos clients
-              et optimisent votre activité 24h/24. Sans effort.
+              Automatisez vos reservations, paiements et gestion client en 30 minutes.
+              Un assistant IA disponible 24/7 pour vos clients.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -39,14 +40,14 @@ export default function Home() {
                 href="/contact"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-cyan-600 rounded-lg font-semibold text-lg hover:bg-gray-50 transition-all hover:scale-105 shadow-xl"
               >
-                Démarrer Gratuitement
+                Demarrer gratuitement 14 jours
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <Link
-                href="/pricing"
+                href="/features"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 rounded-lg font-semibold text-lg hover:bg-white/20 transition-all"
               >
-                Voir les Tarifs
+                Voir la demo
               </Link>
             </div>
 
@@ -77,56 +78,201 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Temoignage Fatou - Section Vedette */}
+      <section className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-3xl p-8 lg:p-12">
+            <div className="grid lg:grid-cols-2 gap-10 items-center">
+              {/* Temoignage */}
+              <div>
+                <div className="flex items-center gap-1 mb-4">
+                  {[1, 2, 3, 4, 5].map(s => (
+                    <Star key={s} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <blockquote className="text-2xl lg:text-3xl font-medium text-gray-900 mb-6 leading-relaxed">
+                  "Depuis NEXUS, je gagne 15h/semaine. Halimah gere mes reservations 24/7,
+                  je peux enfin me concentrer sur mes clientes."
+                </blockquote>
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+                    F
+                  </div>
+                  <div>
+                    <div className="text-xl font-bold text-gray-900">Fatou</div>
+                    <div className="text-gray-600">Fat's Hair-Afro · Franconville</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Stats Fatou */}
+              <div className="grid grid-cols-3 gap-4">
+                <div className="bg-white rounded-2xl p-6 shadow-lg text-center">
+                  <div className="text-3xl lg:text-4xl font-bold text-green-600 mb-1">+40%</div>
+                  <div className="text-sm text-gray-600">reservations</div>
+                </div>
+                <div className="bg-white rounded-2xl p-6 shadow-lg text-center">
+                  <div className="text-3xl lg:text-4xl font-bold text-blue-600 mb-1">-15h</div>
+                  <div className="text-sm text-gray-600">par semaine</div>
+                </div>
+                <div className="bg-white rounded-2xl p-6 shadow-lg text-center">
+                  <div className="text-3xl lg:text-4xl font-bold text-purple-600 mb-1">0</div>
+                  <div className="text-sm text-gray-600">RDV manque</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Avant / Apres */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              La difference NEXUS
+            </h2>
+            <p className="text-xl text-gray-600">
+              Passez du chaos a l'automatisation en quelques clics
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Avant */}
+            <div className="bg-white rounded-2xl p-8 border-2 border-red-100">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                  <X className="w-6 h-6 text-red-500" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900">Avant NEXUS</h3>
+              </div>
+              <ul className="space-y-4">
+                {[
+                  { icon: Phone, text: 'Telephone qui sonne pendant les prestations' },
+                  { icon: Calendar, text: 'Oublis de RDV et annulations de derniere minute' },
+                  { icon: Clock, text: 'Gestion manuelle de l\'agenda' },
+                  { icon: CreditCard, text: 'Paiements en especes uniquement' },
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <div className="w-8 h-8 bg-red-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-4 h-4 text-red-400" />
+                    </div>
+                    <span className="text-gray-600">{item.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Apres */}
+            <div className="bg-white rounded-2xl p-8 border-2 border-green-100">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                  <Check className="w-6 h-6 text-green-500" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900">Avec NEXUS</h3>
+              </div>
+              <ul className="space-y-4">
+                {[
+                  { icon: Bot, text: 'Reservations automatiques 24h/24, 7j/7' },
+                  { icon: MessageSquare, text: 'Rappels automatiques par SMS et WhatsApp' },
+                  { icon: Calendar, text: 'Agenda synchronise en temps reel' },
+                  { icon: CreditCard, text: 'Paiements en ligne securises (Stripe)' },
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <div className="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-4 h-4 text-green-500" />
+                    </div>
+                    <span className="text-gray-700 font-medium">{item.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Features Grid */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Inter', sans-serif" }}>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
               Tout ce dont vous avez besoin
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              NEXUS combine puissance de l'IA et simplicité d'utilisation
+              NEXUS combine puissance de l'IA et simplicite d'utilisation
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: Bot, title: 'Agent IA Client', desc: "Répond à vos clients 24h/24, prend les RDV, gère les annulations. Par téléphone, WhatsApp ou chat.", color: 'cyan' },
-              { icon: Sparkles, title: 'Assistant Back-Office', desc: "Analysez vos performances, gérez vos clients, optimisez votre planning. En langage naturel.", color: 'purple' },
-              { icon: Calendar, title: 'Gestion Complète', desc: "Agenda, clients, services, paiements, analytics. Tout centralisé dans une interface moderne.", color: 'blue' },
-              { icon: TrendingUp, title: 'Analytics Intelligents', desc: "KPIs temps réel, comparaisons, insights automatiques, exports Excel/PDF. Pilotez votre croissance.", color: 'green' },
-              { icon: Zap, title: 'Installation Express', desc: "Prêt en 30 minutes. Configuration simple, formation incluse. Vous vendez le jour même.", color: 'yellow' },
-              { icon: Shield, title: 'Sécurité Maximale', desc: "Multi-tenant isolé, données cryptées, RGPD conforme. Vos données sont protégées.", color: 'red' },
+              { icon: Bot, title: 'Agent IA Client', desc: "Repond a vos clients 24h/24, prend les RDV, gere les annulations. Par telephone, WhatsApp ou chat." },
+              { icon: Sparkles, title: 'Assistant Back-Office', desc: "Analysez vos performances, gerez vos clients, optimisez votre planning. En langage naturel." },
+              { icon: Calendar, title: 'Gestion Complete', desc: "Agenda, clients, services, paiements, analytics. Tout centralise dans une interface moderne." },
+              { icon: TrendingUp, title: 'Analytics Intelligents', desc: "KPIs temps reel, comparaisons, insights automatiques, exports Excel/PDF. Pilotez votre croissance." },
+              { icon: Zap, title: 'Installation Express', desc: "Pret en 30 minutes. Configuration simple, formation incluse. Vous vendez le jour meme." },
+              { icon: Shield, title: 'Securite Maximale', desc: "Multi-tenant isole, donnees cryptees, RGPD conforme. Vos donnees sont protegees." },
             ].map((f, i) => (
               <div key={i} className="group p-8 rounded-2xl border border-gray-200 hover:shadow-xl transition-all hover:-translate-y-1">
                 <div className="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center mb-4">
                   <f.icon className="w-6 h-6 text-cyan-600" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: "'Inter', sans-serif" }}>{f.title}</h3>
+                <h3 className="text-xl font-semibold mb-2">{f.title}</h3>
                 <p className="text-gray-600">{f.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link
+              href="/features"
+              className="inline-flex items-center gap-2 text-cyan-600 font-semibold hover:text-cyan-700 transition"
+            >
+              Voir tous les modules
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Chiffres Cles */}
+      <section className="py-24 bg-gradient-to-br from-cyan-500 to-blue-600 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">NEXUS en chiffres</h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            {[
+              { val: '30 min', label: 'Installation' },
+              { val: '24/7', label: 'Disponibilite IA' },
+              { val: '-88%', label: 'Couts IA optimises' },
+              { val: '99.9%', label: 'Uptime garanti' },
+            ].map((s, i) => (
+              <div key={i} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                <div className="text-4xl md:text-5xl font-bold mb-2">{s.val}</div>
+                <div className="text-white/80">{s.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Autres temoignages */}
       <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Inter', sans-serif" }}>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
               Ils nous font confiance
             </h2>
             <p className="text-xl text-gray-600">
-              Rejoignez les entrepreneurs qui ont révolutionné leur business
+              Rejoignez les entrepreneurs qui ont revolutionne leur business
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { text: "Halimah gère maintenant 80% de mes prises de RDV. Je peux enfin me concentrer sur mon cœur de métier. Un gain de temps incroyable !", name: 'Fatou', biz: "Fat's Hair-Afro · Franconville", gradient: 'from-purple-400 to-pink-400', initial: 'F' },
-              { text: "Installation en 20 minutes, premiers RDV IA le jour même. L'interface est intuitive, mes clients adorent !", name: 'Amadou', biz: 'Salon · Paris 18e', gradient: 'from-blue-400 to-cyan-400', initial: 'A' },
+              { text: "Installation en 20 minutes, premiers RDV IA le jour meme. L'interface est intuitive, mes clients adorent !", name: 'Amadou', biz: 'Salon · Paris 18e', gradient: 'from-blue-400 to-cyan-400', initial: 'A' },
               { text: "Le dashboard analytics m'a permis d'identifier mes heures creuses et d'optimiser mon planning. +40% de CA en 2 mois.", name: 'Safiya', biz: 'Institut · Argenteuil', gradient: 'from-green-400 to-emerald-400', initial: 'S' },
+              { text: "Fini les appels en pleine coupe ! Halimah gere tout. Mes clientes recoivent les confirmations instantanement.", name: 'Khadija', biz: 'Coiffeuse · Sarcelles', gradient: 'from-purple-400 to-pink-400', initial: 'K' },
             ].map((t, i) => (
               <div key={i} className="bg-white p-8 rounded-2xl shadow-lg">
                 <div className="flex items-center gap-1 mb-4">
@@ -150,30 +296,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-24 bg-gradient-to-br from-cyan-500 to-blue-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { val: '80%', label: 'RDV automatisés' },
-              { val: '30min', label: 'Installation moyenne' },
-              { val: '24/7', label: 'Disponibilité IA' },
-              { val: '+40%', label: 'CA moyen clients' },
-            ].map((s, i) => (
-              <div key={i}>
-                <div className="text-4xl md:text-5xl font-bold mb-2">{s.val}</div>
-                <div className="text-white/80">{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Final CTA */}
       <section className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
-            Prêt à transformer votre business ?
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            Pret a transformer votre business ?
           </h2>
           <p className="text-xl text-gray-600 mb-12">
             Rejoignez NEXUS aujourd'hui. Sans engagement, sans carte bancaire.
@@ -182,7 +309,7 @@ export default function Home() {
             href="/contact"
             className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg font-semibold text-lg hover:shadow-xl transition-all hover:scale-105"
           >
-            Démarrer Gratuitement
+            Demarrer Gratuitement
             <ArrowRight className="w-5 h-5" />
           </Link>
           <p className="text-gray-500 mt-6">
