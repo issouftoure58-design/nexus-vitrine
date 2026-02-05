@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import Pricing from './pages/Pricing';
 import Features from './pages/Features';
 import Contact from './pages/Contact';
+import Demo from './pages/Demo';
 
 // NEXUS Operator Dashboard pages
 import NexusLogin from './pages/nexus/NexusLogin';
@@ -17,7 +18,8 @@ function Navbar() {
 
   const links = [
     { href: '/', label: 'Accueil' },
-    { href: '/features', label: 'Fonctionnalites' },
+    { href: '/features', label: 'Fonctionnalités' },
+    { href: '/demo', label: 'Démo' },
     { href: '/pricing', label: 'Tarifs' },
     { href: '/contact', label: 'Contact' },
   ];
@@ -111,6 +113,11 @@ function NexusProtectedRoute({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   const [location] = useLocation();
+
+  // Demo page has its own layout
+  if (location === '/demo') {
+    return <Demo />;
+  }
 
   // NEXUS dashboard pages have their own layout (dark theme)
   const isNexusRoute = location.startsWith('/nexus');
