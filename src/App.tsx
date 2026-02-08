@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Switch, Route, Link, useLocation, Redirect } from 'wouter';
 import Home from './pages/Home';
+import About from './pages/About';
 import Pricing from './pages/Pricing';
 import Features from './pages/Features';
 import Contact from './pages/Contact';
@@ -20,8 +21,9 @@ function Navbar() {
 
   const navLinks = [
     { href: '/', label: 'Accueil' },
-    { href: '/features', label: 'Fonctionnalités' },
-    { href: '/demo', label: 'Démo Live', highlight: true },
+    { href: '/about', label: 'A propos' },
+    { href: '/features', label: 'Fonctionnalites' },
+    { href: '/demo', label: 'Demo Live', highlight: true },
     { href: '/pricing', label: 'Tarifs' },
     { href: '/contact', label: 'Contact' },
   ];
@@ -243,6 +245,7 @@ export default function App() {
       <main className="flex-1">
         <Switch>
           <Route path="/" component={Home} />
+          <Route path="/about" component={About} />
           <Route path="/pricing" component={Pricing} />
           <Route path="/features" component={Features} />
           <Route path="/contact" component={Contact} />
