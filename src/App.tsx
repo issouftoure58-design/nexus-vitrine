@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Switch, Route, Link, useLocation, Redirect } from 'wouter';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -6,6 +6,17 @@ import Pricing from './pages/Pricing';
 import Features from './pages/Features';
 import Contact from './pages/Contact';
 import Demo from './pages/Demo';
+
+// Scroll to top on route change
+function ScrollToTop() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  return null;
+}
 
 // NEXUS Operator Dashboard pages
 import NexusLogin from './pages/nexus/NexusLogin';
@@ -214,6 +225,8 @@ export default function App() {
 
   if (isNexusRoute) {
     return (
+      <>
+      <ScrollToTop />
       <Switch>
         <Route path="/nexus/login" component={NexusLogin} />
         <Route path="/nexus/dashboard">
@@ -235,11 +248,14 @@ export default function App() {
           <Redirect to="/nexus/dashboard" />
         </Route>
       </Switch>
+      </>
     );
   }
 
   // Public commercial pages with Navbar/Footer
   return (
+    <>
+    <ScrollToTop />
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1">
@@ -266,5 +282,6 @@ export default function App() {
       </main>
       <Footer />
     </div>
+    </>
   );
 }
