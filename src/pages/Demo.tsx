@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { Link } from 'wouter';
 import {
   MessageCircle, Phone, Mail, Calendar,
-  TrendingUp, DollarSign, Users, Package,
-  Instagram, Facebook, Sparkles, Brain,
-  CheckCircle, Clock, Bell, BarChart3,
-  Zap, Award, ShoppingCart, FileText,
-  ArrowRight, Play, ChevronRight, Star,
-  Target, Megaphone, Shield, Settings,
+  TrendingUp, DollarSign, Users,
+  Sparkles, Brain,
+  CheckCircle, Bell, BarChart3,
+  Zap, Award, FileText,
+  ArrowRight, Play, Star,
+  Target, Megaphone,
   Rocket
 } from 'lucide-react';
 
@@ -19,7 +19,6 @@ export default function Demo() {
     { type: 'bot', text: 'Bonjour ! Je suis Halimah, votre assistante IA. Comment puis-je vous aider ?' }
   ]);
   const [inputMessage, setInputMessage] = useState('');
-  const [selectedModule, setSelectedModule] = useState<string | null>(null);
   const [statsView, setStatsView] = useState<'today' | 'week' | 'month'>('today');
 
   // Demo messages predefinis
