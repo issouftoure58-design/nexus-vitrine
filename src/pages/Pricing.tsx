@@ -368,7 +368,7 @@ export default function Pricing() {
                     </li>
                     <li className="flex items-start gap-2">
                       <Check className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700">Plan à 399€/mois</span>
+                      <span className="text-gray-700">Plan à 499€/mois</span>
                     </li>
                   </ul>
 
@@ -407,7 +407,7 @@ export default function Pricing() {
                   </li>
                   <li className="flex items-start gap-2">
                     <Check className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">Plan à 399€/mois</span>
+                    <span className="text-gray-700">Plan à 499€/mois</span>
                   </li>
                 </ul>
 
@@ -445,7 +445,7 @@ export default function Pricing() {
                   </li>
                   <li className="flex items-start gap-2">
                     <Check className="w-4 h-4 text-cyan-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">Plan à 199€/mois</span>
+                    <span className="text-gray-700">Plan à 249€/mois</span>
                   </li>
                 </ul>
 

@@ -1142,7 +1142,7 @@ const MESSAGES_CONFIG = {
     audio: "/audio/welcome.mp3"
   },
   prix: {
-    text: "Nous avons 3 plans : Starter a 199€/mois avec 1 assistant IA, CRM et agenda. Pro a 399€/mois avec tous les assistants IA, marketing et comptabilite. Business a 799€/mois pour les entreprises multi-sites avec API et account manager dedie. Essai gratuit de 14 jours !",
+    text: "Nous avons 3 plans : Starter a 99€/mois avec 1 assistant IA, CRM et agenda. Pro a 249€/mois avec tous les assistants IA, marketing et comptabilite. Business a 499€/mois pour les entreprises multi-sites avec API et account manager dedie. Essai gratuit de 14 jours !",
     audio: null // Pas d'audio pour ce nouveau texte
   },
   telephone: {
@@ -1162,7 +1162,7 @@ const MESSAGES_CONFIG = {
     audio: "/audio/faq-essai.mp3"
   },
   default: {
-    text: "Je suis la pour repondre a toutes vos questions sur NEXUS ! Vous pouvez me demander des infos sur nos plans (Starter 199€, Pro 399€, Business 799€), les fonctionnalites, ou comment demarrer votre essai gratuit.",
+    text: "Je suis la pour repondre a toutes vos questions sur NEXUS ! Vous pouvez me demander des infos sur nos plans (Starter 99€, Pro 249€, Business 499€), les fonctionnalites, ou comment demarrer votre essai gratuit.",
     audio: null
   }
 }

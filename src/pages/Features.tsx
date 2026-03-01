@@ -329,7 +329,7 @@ export default function Features() {
           onClick={() => setActivePlan('pro')}
         >
           <span className="plan-name">Pro</span>
-          <span className="plan-price">199€/mois</span>
+          <span className="plan-price">249€/mois</span>
           <span className="badge">Populaire</span>
         </button>
         <button
@@ -337,7 +337,7 @@ export default function Features() {
           onClick={() => setActivePlan('business')}
         >
           <span className="plan-name">Business</span>
-          <span className="plan-price">399€/mois</span>
+          <span className="plan-price">499€/mois</span>
         </button>
       </div>
 
