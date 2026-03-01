@@ -1,4 +1,8 @@
 import { useState, useEffect, useRef, useCallback, Suspense, lazy } from 'react'
+import { Route, Switch } from 'wouter'
+import MentionsLegales from './pages/MentionsLegales'
+import CGV from './pages/CGV'
+import Confidentialite from './pages/Confidentialite'
 
 // Lazy load Spline pour éviter de bloquer le chargement initial
 const Spline = lazy(() => import('@splinetool/react-spline'))
@@ -2254,14 +2258,15 @@ function App() {
             <div>
               <h4 className="font-semibold mb-4">Legal</h4>
               <ul className="space-y-2 text-sm text-gray-500">
-                <li><a href="#" className="hover:text-white transition">CGV</a></li>
-                <li><a href="#" className="hover:text-white transition">Confidentialite</a></li>
-                <li><a href="#" className="hover:text-white transition">Mentions legales</a></li>
+                <li><a href="/cgv" className="hover:text-white transition">CGV</a></li>
+                <li><a href="/confidentialite" className="hover:text-white transition">Confidentialite</a></li>
+                <li><a href="/mentions-legales" className="hover:text-white transition">Mentions legales</a></li>
               </ul>
             </div>
           </div>
           <div className="border-t border-white/5 pt-8 text-center text-sm text-gray-500">
-            <p>© 2026 NEXUS. Tous droits reserves.</p>
+            <p>© 2026 Nexus.AI — Issouf Toure, Entrepreneur individuel — SIRET 947 570 362 00022</p>
+            <p className="mt-1">TVA non applicable, art. 293 B du CGI</p>
           </div>
         </div>
       </footer>
@@ -2270,4 +2275,15 @@ function App() {
   )
 }
 
-export default App
+function AppRouter() {
+  return (
+    <Switch>
+      <Route path="/mentions-legales" component={MentionsLegales} />
+      <Route path="/cgv" component={CGV} />
+      <Route path="/confidentialite" component={Confidentialite} />
+      <Route component={App} />
+    </Switch>
+  )
+}
+
+export default AppRouter
