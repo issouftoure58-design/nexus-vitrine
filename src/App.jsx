@@ -2052,7 +2052,7 @@ function App() {
                 <h3 className="text-xl font-bold mb-2">Starter</h3>
                 <p className="text-gray-400 text-sm mb-4">Pour demarrer avec l'IA</p>
                 <div className="flex items-baseline justify-center gap-1">
-                  <span className="text-4xl font-bold">199€</span>
+                  <span className="text-4xl font-bold">99€</span>
                   <span className="text-gray-500">/mois</span>
                 </div>
               </div>
@@ -2095,7 +2095,7 @@ function App() {
                 <h3 className="text-xl font-bold mb-2">Pro</h3>
                 <p className="text-gray-400 text-sm mb-4">Pour les professionnels</p>
                 <div className="flex items-baseline justify-center gap-1">
-                  <span className="text-4xl font-bold text-neon-cyan">399€</span>
+                  <span className="text-4xl font-bold text-neon-cyan">249€</span>
                   <span className="text-gray-500">/mois</span>
                 </div>
               </div>
@@ -2139,7 +2139,7 @@ function App() {
                 <h3 className="text-xl font-bold mb-2">Business</h3>
                 <p className="text-gray-400 text-sm mb-4">Pour les entreprises</p>
                 <div className="flex items-baseline justify-center gap-1">
-                  <span className="text-4xl font-bold text-purple-400">799€</span>
+                  <span className="text-4xl font-bold text-purple-400">499€</span>
                   <span className="text-gray-500">/mois</span>
                 </div>
               </div>
